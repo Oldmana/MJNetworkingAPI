@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.teambrimis.brett.MJNetworkingAPI.MJConnection;
 import net.teambrimis.brett.MJNetworkingAPI.MJDataBuffer;
 
 /**The base class extended by all packets. Subclasses should override <i>fromBytes</i> and <i>toBytes</i>.
@@ -87,6 +88,12 @@ public abstract class Packet
 	public static void sendPacket(Socket s, Packet p) throws Exception
 	{
 		DataOutputStream out = (DataOutputStream) s.getOutputStream();
+		out.write(p.toBytes());
+	}
+	
+	public static void sendPacket(MJConnection connection, Packet p) throws Exception
+	{
+		DataOutputStream out = (DataOutputStream) connection.getSocket().getOutputStream();
 		out.write(p.toBytes());
 	}
 	
