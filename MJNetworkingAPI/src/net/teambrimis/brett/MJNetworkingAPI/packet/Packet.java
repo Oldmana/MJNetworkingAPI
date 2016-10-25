@@ -11,9 +11,9 @@ import java.util.Map;
 import net.teambrimis.brett.MJNetworkingAPI.MJConnection;
 import net.teambrimis.brett.MJNetworkingAPI.MJDataBuffer;
 
-/**The base class extended by all packets. Subclasses should override <i>fromBytes</i> and <i>toBytes</i>.
- * Additionally, every subclass must have a public static int field named <i>ID</i>, which will be the unique ID 
- * of the packet.
+/**The base class extended by all packets. Subclasses should override <i>fromBytes</i> and <i>toBytes</i>. A blank
+ * constructor should always be present. Additionally, every subclass must have a public static int field named
+ * <i>ID</i>, which will be the unique ID of the packet.
  *
  */
 public abstract class Packet
