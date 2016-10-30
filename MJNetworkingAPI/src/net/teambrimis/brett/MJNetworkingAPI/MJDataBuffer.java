@@ -171,6 +171,7 @@ public class MJDataBuffer
 	
 	public void addString(String s)
 	{
+		addInt(s.length());
 		for (char c : s.toCharArray())
 		{
 			try
@@ -183,24 +184,40 @@ public class MJDataBuffer
 				addChar(c);
 			}
 		}
-		finalizeString();
 	}
 	
 	public String getString()
 	{
+		int len = getInt();
 		String str = "";
-		while (true)
+		for (int i = 0 ; i < len ; i++)
 		{
-			if (stringFinished())
-			{
-				break;
-			}
 			str += getChar();
 		}
 		return str;
 	}
 	
-	private void finalizeString()
+	public void addInts(int[] is)
+	{
+		addInt(is.length);
+		for (int i : is)
+		{
+			addInt(i);
+		}
+	}
+	
+	public int[] getInts()
+	{
+		int len = getInt();
+		int[] is = new int[len];
+		for (int i = 0 ; i < len ; i++)
+		{
+			is[i] = getInt();
+		}
+		return is;
+	}
+	
+	private void finalizeArray()
 	{
 		try
 		{
@@ -222,7 +239,7 @@ public class MJDataBuffer
 		}
 	}
 	
-	private boolean stringFinished()
+	private boolean arrayFinished()
 	{
 		int pos = bb.position();
 		if (bb.get() == -232 && bb.get() == 242)

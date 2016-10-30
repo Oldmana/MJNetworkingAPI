@@ -64,6 +64,11 @@ public class MJConnection
 		return null;
 	}
 	
+	public boolean isClosed()
+	{
+		return socket.isClosed();
+	}
+	
 	public void close() throws IOException
 	{
 		socket.close();
